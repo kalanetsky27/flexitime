@@ -1,0 +1,53 @@
+/*   inline dialog menu   */
+
+.b_inline_dialog_container {
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 10;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.75);
+}
+
+.b_inline_dialog_container_items {
+    overflow: auto;
+}
+
+.b_inline_dialog_bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    background-color: rgba(255,255,255,0.01);
+}
+
+.inline_menu_container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.b_inline_dialog_item {
+    padding: 9px 14px;
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.b_item_white {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.b_inline_dialog_item.b_item_white:hover {
+    background-color: #f8f9ff;
+}
+
+

@@ -1,0 +1,65 @@
+.body {
+    background-color: #FDFBFF;
+}
+
+.margin_bottom_not_last:not(:last-child) {
+    margin-bottom: 7px;
+}
+
+/* ---------------- logo ------------------- */
+
+.index_logo_pad {
+    padding-top: 15px;
+    padding-bottom: 25px;
+}
+
+.index_logo_img {
+    float: left;
+    width: 62px;
+    height: 62px;
+    margin-right: 8px;
+}
+.index_logo_txt {
+    font-size: 2em;
+}
+
+.index_title_txt {
+    font-size: 1.4em;
+    margin-bottom: 12px;
+}
+@media (max-width:767px)  {
+    .index_logo_img {
+        width: 56px;
+        height: 56px;
+        margin-right: 7px;
+    }
+
+    .index_logo_txt {
+        font-size: 1.8em;
+    }
+
+    .index_title_txt {
+        font-size: 1.3em;
+        margin-bottom: 10px;
+    }
+
+}
+
+@media (max-width:620px)  {
+    .index_logo_img {
+        width: 50px;
+        height: 50px;
+        margin-right: 5px;
+    }
+
+    .index_logo_txt {
+        font-size: 1.5em;
+    }
+
+    .index_title_txt {
+        font-size: 1.2em;
+        margin-bottom: 9px;
+    }
+
+}
+

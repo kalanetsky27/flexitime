@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title class="locale" data-locale="panel_title"></title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="content-language" content="ru">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="manifest" href="../manifest.json">
+<link rel="mask-icon" href="../safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="stylesheet" href="css/bumpix/min/bootstrap.min.css">
+<link rel="stylesheet" href="css/bumpix/min/fontello.css?1">
+
+<script src="js/bumpix/min/jquery-3.1.1.min.js"></script>
+
+<link rel="stylesheet" href="css/bumpix/min/cabinet_general.css?1748855210">
+<script src="js/bumpix/locales/language_locales.js?1748857036"></script>
+<script src="js/bumpix/locales/cabinet.ru.js?1748834972"></script>
+<script src="js/bumpix/min/cabinet_general.min.js?1748857036"></script>
+
+<link rel="stylesheet" href="css/bumpix/min/bumpix_engine.css?1748814408">
+<script src="js/bumpix/min/bumpix_engine.min.js?1748814408"></script>
+<script src="js/locales/bootstrap-datepicker/bootstrap-datepicker.ru.min.js?1748845418"></script>
+<script src="js/locales/moment/ru.js?1748834696"></script>
+<script src="js/bumpix/locales/cabinet_countries.ru.js?1748839232"></script>
+<script src="js/bumpix/locales/cabinet_currencies.ru.js?1748839232"></script>
+</head>
+
+<body>
+
+<div id="dialogContainer" class="dialog-container"></div>
+
+<div id="loading" class="loading-container">
+    <div class="table width100 height100">
+        <div class="table_cell text_center text_v_middle">
+            <i class="icon-spin3 animate-spin loading-spinner"></i>
+        </div>
+    </div>
+</div>
+
+<div class="cd-side-nav dg_break_words noselect">
+
+    <div class="menu_item relative child_account_area hide_block" id="menuChildAccountInfo"><div class="locale" data-locale="child_access_rights"></div><div class="no_wrap_ellipsis locale" style="color: #c2e4e6; font-size: 0.9em;" data-locale="child_account_restrictions">&nbsp;</div></div>
+
+
+    <div style="padding: 10px; border-bottom: 1px solid #402d5b;">
+        <div class="table_block width100">
+            <div style="color: #f1f1f1;" class="table_cell vertical_bottom locale" data-locale="panel_account"></div>
+            <div class="table_cell width1 no_wrap_ellipsis">
+                <div id="locale_spinner" style="font-size: 0.9em; color: #c6c6c6; padding: 2px 1px 2px 6px; border-radius: 5px;" class="c_pointer">
+                    <span id="field_locale"></span><i class="icon-down-dir"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="no_wrap_ellipsis" style="color: #fffcdf; font-size: 0.9em; padding-top: 3px;">kalan271983@gmail.com</div>
+    </div>
+
+    <div class="menu_item relative master_area" id="menuMasterDefault"><div class="locale" data-locale="master_profile"></div><div class="no_wrap_ellipsis" style="color: #ffccfe; font-size: 0.9em; padding-right: 30px" id="default_master">&nbsp;</div>  <i class="icon-ellipsis-vert btn_add hide_block" id="insideMenuMasters"></i> </div>
+
+    <ul>
+        <li class="menu_item relative hide_block" id="menuPayMasterProfile"><a href="#" class="color_attention locale" data-locale="payment_title"></a> <i class="icon-attention btn_add attention"></i></li>
+        <li class="menu_item relative" id="menuClients"><a href="#" class="locale" data-locale="panel_clients"></a> <i class="icon-ellipsis-vert btn_add hide_block" id="insideMenuClients"></i> </li>
+        <li class="menu_item relative hide_block" id="menuIncomes"><a href="#" class="locale" data-locale="str_incomes"></a> <i class="icon-plus-squared btn_add menu_item_add" id="addIncome"></i></li>
+        <li class="menu_item relative hide_block" id="menuOutlays"><a href="#" class="locale" data-locale="str_outlays"></a> <i class="icon-plus-squared btn_add menu_item_add" id="addOutlay"></i></li>
+        <li class="menu_item hide_block" id="menuReports"><a href="#" class="locale" data-locale="panel_reports_and_planning"></a></li>
+        <li class="menu_item relative hide_block" id="menuWaitingList"><a href="#"><span class="locale" data-locale="waiting_list_title"></span> <span class="count grey hide_block" id="waitingListCount"></span></a></li>
+        <li class="menu_item relative hide_block" id="menuSupport"><a href="#"><span class="locale" data-locale="support_title"></span> <span class="count hide_block" id="supportCount"></span></a></li>
+        <li class="menu_item" id="menuSettings"><a href="#" class="locale" data-locale="str_settings"></a></li>
+        <li class="menu_item relative hide_block" id="menuDateTime"><a href="#" class="locale" data-locale="panel_date_time"></a> <i class="icon-attention btn_add attention hide_block" id="attentionDateTime"></i></li>
+        <li class="menu_item" id="menuAndroidApp"><a href="#" class="locale" data-locale="panel_android_app"></a></li>
+        <li class="menu_item" id="menuIOSApp"><a href="#" class="locale" data-locale="panel_ios_app"></a></li>
+        <li class="menu_item" id="menuLogout"><a href="#" class="locale" data-locale="panel_logout"></a></li>
+    </ul>
+
+    <div class="relative sync_area" id="menuSync"><div class="table_cell vertical_middle"> <div id="sync_title" style="font-size: 1rem; color: #cecece;"></div><div class="no_wrap_ellipsis" style="display: block; color: #ffccfe; font-size: 0.85em; padding-right: 30px" id="sync_date"></div> <i style="color: #b392b7; right: 8px; font-size: 1.2em" class="icon-spin3 btn_add" id="sync_spin"></i> </div></div>
+
+
+</div>
+
+<div id="contentBlock"></div>
+
+<script type="text/javascript">
+
+    currLocale = 'ru';
+    userImgId = '4734687222';
+    userTmpId = '473468';
+    wsAddress = 'wss://bumpix.net:2929';
+    storage.setHasFCM(true);
+    storage.setChildAccount();
+
+    setTimeFormatIfNeed(currLocale);
+
+    if(cookieMaster.getLastSupportTime() == 0) {
+        cookieMaster.setLastSupportTime(1748881992);
+    }
+    supportMaster.initSupportData(1748793391, 1748881992);
+
+</script>
+
+<script src="js/bumpix/min/cabinet_general_page.min.js?1748870699"></script>
+
+
+<script type="module" src="../js/auth_general.js"></script>
+</body>
+</html>
+
+

@@ -84,46 +84,63 @@
 
 <div id="contentBlock"></div>
 
+<!-- Глобальные переменные и инициализация -->
 <script type="text/javascript">
+  currLocale = 'ru';
+  userImgId = '4734687222';
+  userTmpId = '473468';
+  wsAddress = 'wss://bumpix.net:2929';
+  storage.setHasFCM(true);
+  storage.setChildAccount();
 
-    currLocale = 'ru';
-    userImgId = '4734687222';
-    userTmpId = '473468';
-    wsAddress = 'wss://bumpix.net:2929';
-    storage.setHasFCM(true);
-    storage.setChildAccount();
+  setTimeFormatIfNeed(currLocale);
 
-    setTimeFormatIfNeed(currLocale);
-
-    if(cookieMaster.getLastSupportTime() == 0) {
-        cookieMaster.setLastSupportTime(1748881992);
-    }
-    supportMaster.initSupportData(1748793391, 1748881992);
-
+  if(cookieMaster.getLastSupportTime() == 0) {
+      cookieMaster.setLastSupportTime(1748881992);
+  }
+  supportMaster.initSupportData(1748793391, 1748881992);
 </script>
 
+<!-- Один раз: основной скрипт интерфейса -->
 <script src="js/bumpix/min/cabinet_general_page.min.js?1748870699"></script>
 
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 
-<script src="../js/auth_general.js"></script>
+<!-- Firebase авторизация -->
 <script>
-  // Проверка авторизации (перенаправление, если пользователь не вошёл)
+  const firebaseConfig = {
+    apiKey: "AIzaSyBuPfvm9OEvt1GCU_eNq7J3ZG2vU49oK1A",
+    authDomain: "flexitime-972a5.firebaseapp.com",
+    projectId: "flexitime-972a5",
+    storageBucket: "flexitime-972a5.appspot.com",
+    messagingSenderId: "943265429234",
+    appId: "1:943265429234:web:51fe84b509ddd96c79026b"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+
   firebase.auth().onAuthStateChanged(function(user) {
     if (!user) {
       window.location.href = "../index.html";
     }
   });
 
-  // Обработчик выхода
-  const logoutBtn = document.getElementById("menuLogout");
-  if (logoutBtn) {
-    logoutBtn.addEventListener("click", function () {
-      firebase.auth().signOut().then(function () {
-        window.location.href = "../index.html";
+  document.addEventListener("DOMContentLoaded", function () {
+    const logoutBtn = document.getElementById("menuLogout");
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", function () {
+        firebase.auth().signOut().then(function () {
+          window.location.href = "../index.html";
+        });
       });
-    });
-  }
+    }
+  });
 </script>
+
+
+    
     
 </body>
 </html>

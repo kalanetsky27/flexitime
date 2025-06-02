@@ -1,36 +1,26 @@
+setLocaleData($("head"));
+setLocaleData($(".container"));
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+$("#field_locale").text(currLocale.toUpperCase());
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBuPfvm9OEvt1GCU_eNq7J3ZG2vU49oK1A",
-  authDomain: "flexitime-972a5.firebaseapp.com",
-  projectId: "flexitime-972a5",
-  storageBucket: "flexitime-972a5.appspot.com",
-  messagingSenderId: "943265429234",
-  appId: "1:943265429234:web:51fe84b509ddd96c79026b",
-  measurementId: "G-3RRH8JF0EJ"
-};
+$("#locale_spinner").on("click", function() {
+    var $this = $(this);
+    $this.widgetMenuDialogSimple({
+        menuContainer: $("body"),
+        parentContainer: $("#inlineMenuContainer"),
+        items: $.l_sets.locale_items,
+        callBack: function(item) {
+            var queryOld = window.location.href;
+            queryOld = queryOld.replace(CABINET_URL, "");
+            queryOld = queryOld.replace(/\/+$/g,"");
+            if(queryOld.indexOf(currLocale+"/") === 0) {
+                queryOld = queryOld.substr(3);
+            } else if(queryOld.indexOf(currLocale) === 0) {
+                queryOld = queryOld.substr(2);
+            }
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-// Проверка входа
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    console.log("Пользователь вошёл:", user.email);
-    const emailDisplay = document.getElementById("user_email");
-    if (emailDisplay) emailDisplay.textContent = user.email;
-  } else {
-    window.location.href = "../index.html";
-  }
+            currLocale = item.id;
+            window.location.href = CABINET_URL+getCurrLocalePath()+queryOld;
+        }
+    });
 });
-
-// Выход
-const logoutBtn = document.getElementById("logout_btn");
-if (logoutBtn) {
-  logoutBtn.addEventListener("click", async () => {
-    await signOut(auth);
-    window.location.href = "../index.html";
-  });
-}

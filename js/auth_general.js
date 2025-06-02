@@ -1,26 +1,27 @@
-setLocaleData($("head"));
-setLocaleData($(".container"));
 
-$("#field_locale").text(currLocale.toUpperCase());
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-$("#locale_spinner").on("click", function() {
-    var $this = $(this);
-    $this.widgetMenuDialogSimple({
-        menuContainer: $("body"),
-        parentContainer: $("#inlineMenuContainer"),
-        items: $.l_sets.locale_items,
-        callBack: function(item) {
-            var queryOld = window.location.href;
-            queryOld = queryOld.replace(CABINET_URL, "");
-            queryOld = queryOld.replace(/\/+$/g,"");
-            if(queryOld.indexOf(currLocale+"/") === 0) {
-                queryOld = queryOld.substr(3);
-            } else if(queryOld.indexOf(currLocale) === 0) {
-                queryOld = queryOld.substr(2);
-            }
+const firebaseConfig = {
+  apiKey: "AIzaSyBuPfvm9OEvt1GCU_eNq7J3ZG2vU49oK1A",
+  authDomain: "flexitime-972a5.firebaseapp.com",
+  projectId: "flexitime-972a5",
+  storageBucket: "flexitime-972a5.appspot.com",
+  messagingSenderId: "943265429234",
+  appId: "1:943265429234:web:51fe84b509ddd96c79026b",
+  measurementId: "G-3RRH8JF0EJ"
+};
 
-            currLocale = item.id;
-            window.location.href = CABINET_URL+getCurrLocalePath()+queryOld;
-        }
-    });
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    window.location.href = "../index.html";
+  }
+});
+
+document.getElementById("menuLogout")?.addEventListener("click", async () => {
+  await signOut(auth);
+  window.location.href = "../index.html";
 });

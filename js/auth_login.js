@@ -1,6 +1,3 @@
-
-// Firebase CDN должен быть подключен в index.html как обычные <script>
-
 const firebaseConfig = {
   apiKey: "AIzaSyBuPfvm9OEvt1GCU_eNq7J3ZG2vU49oK1A",
   authDomain: "flexitime-972a5.firebaseapp.com",
@@ -19,23 +16,28 @@ window.onload = function () {
   }
 
   const loginBtn = document.getElementById("btn_login");
-  if (loginBtn) {
-    loginBtn.addEventListener("click", function () {
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
-      const infoMsg = document.getElementById("info_msg");
+  if (!loginBtn) return;
 
-      auth.signInWithEmailAndPassword(email, password)
-        .then(() => {
-          window.location.href = "cabinet/index.html";
-        })
-        .catch(error => {
-          if (infoMsg) {
-            infoMsg.textContent = "Ошибка: " + error.message;
-            infoMsg.classList.remove("hide_block");
-            infoMsg.classList.add("alert", "alert-danger");
-          }
-        });
-    });
-  }
+  loginBtn.addEventListener("click", function () {
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const infoMsg = document.getElementById("info_msg");
+
+    if (infoMsg) {
+      infoMsg.classList.add("hide_block");
+      infoMsg.textContent = "";
+    }
+
+    auth.signInWithEmailAndPassword(email, password)
+      .then(() => {
+        window.location.href = "cabinet/index.html";
+      })
+      .catch(error => {
+        if (infoMsg) {
+          infoMsg.textContent = "Ошибка: " + error.message;
+          infoMsg.classList.remove("hide_block");
+          infoMsg.classList.add("alert", "alert-danger");
+        }
+      });
+  });
 };

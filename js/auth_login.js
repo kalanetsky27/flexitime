@@ -1,42 +1,52 @@
+var infoBlock = $('#info_msg'),
+    email,
+    password,
+    result,
+    btnAction = $('#btn_login');
 
-// Вызов локализации после загрузки страницы
-window.addEventListener("load", function () {
-  if (typeof applyLocales === "function") {
-    applyLocales(currLocale || 'ru');
-  }
-});
+btnAction.on('click', function () {
+    hideInfoBlock(infoBlock);
 
-// Firebase и вход
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    email = $('#email').val().trim();
+    password = $('#password').val().trim();
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBuPfvm9OEvt1GCU_eNq7J3ZG2vU49oK1A",
-  authDomain: "flexitime-972a5.firebaseapp.com",
-  projectId: "flexitime-972a5",
-  storageBucket: "flexitime-972a5.appspot.com",
-  messagingSenderId: "943265429234",
-  appId: "1:943265429234:web:51fe84b509ddd96c79026b",
-  measurementId: "G-3RRH8JF0EJ"
-};
+    if(!emailValidation.test(email)) {
+        showInfoBlock(infoBlock, $.l.err_email_format);
+    } else if(password.length < 6) {
+        showInfoBlock(infoBlock, $.l.err_pass_format);
+    } else {
+        sendInfoButtonRequest(
+            infoBlock,
+            btnAction,
+            'api_cabinet_login',
+            {e: email, p: password, asc: asc, t: new Date().getTime()},
+            function (data) {
+                result = data['r'];
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-// Обработка входа по кнопке
-document.getElementById("btn_login")?.addEventListener("click", async () => {
-  const email = document.getElementById("email")?.value.trim();
-  const password = document.getElementById("password")?.value;
-  const infoMsg = document.getElementById("info_msg");
-
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-    window.location.href = "cabinet/index.html";
-  } catch (error) {
-    if (infoMsg) {
-      infoMsg.textContent = "Ошибка: " + error.message;
-      infoMsg.classList.remove("hide_block");
-      infoMsg.classList.add("alert", "alert-danger");
+                if(result == 1) {
+                    btnAction.prop('disabled', true);
+                    window.location.href = CABINET_URL+getCurrLocalePath()+'general';
+                } else {
+                    switch(result) {
+                        case 2: showInfoBlock(infoBlock, $.l.err_email_format);
+                            break;
+                        case 3: showInfoBlock(infoBlock, $.l.err_pass_format);
+                            break;
+                        case 4: showInfoBlock(infoBlock, $.l.err_login);
+                            break;
+                        case 5: showInfoBlock(infoBlock, $.l.err_user_blocked);
+                            break;
+                        case 6:
+                            btnAction.hide();
+                            window.location.reload(true);
+                            break;
+                        case 7: showInfoBlock(infoBlock, $.l.err_login_bad_time);
+                            break;
+                        default: showInfoBlock(infoBlock, $.l.err_unknown);
+                    }
+                }
+            }
+        );
     }
-  }
+
 });

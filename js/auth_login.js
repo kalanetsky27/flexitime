@@ -1,13 +1,3 @@
-const firebaseConfig = {
-  apiKey: "AIzaSyBuPfvm9OEvt1GCU_eNq7J3ZG2vU49oK1A",
-  authDomain: "flexitime-972a5.firebaseapp.com",
-  projectId: "flexitime-972a5",
-  storageBucket: "flexitime-972a5.appspot.com",
-  messagingSenderId: "943265429234",
-  appId: "1:943265429234:web:51fe84b509ddd96c79026b"
-};
-
-firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
 window.onload = function () {
